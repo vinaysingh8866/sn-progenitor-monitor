@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sn-progenitor-monitor"
+version = "0.2.0"
+description = "Daily monitor for nearby core-collapse supernovae with pre-explosion HST/JWST imaging"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Vinay Singh" }]
+requires-python = ">=3.10"
+dependencies = ["requests>=2.31"]
+
+[project.optional-dependencies]
+archives = ["astropy>=5.3", "astroquery>=0.4.7"]
+dev = ["pytest>=7", "ruff>=0.4", "astropy>=5.3", "astroquery>=0.4.7"]
+
+[project.scripts]
+sn-monitor = "sn_progenitor_monitor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sn_progenitor_monitor*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
